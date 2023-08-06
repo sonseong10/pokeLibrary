@@ -1,0 +1,123 @@
+.wrapper {
+  flex: 0.5;
+  min-width: 30%;
+  margin: 10px;
+  margin-top: 60px;
+  
+  cursor: pointer;
+  position: relative;
+  border: 2px solid white;
+  border-radius: 20px;
+  transition-duration: 100ms;
+  box-shadow: #EDEDED 0 10px 10px;
+  padding: 15px;
+  background-color: white;
+}
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+}
+
+.card div {
+  text-align: center;
+}
+
+.card dt {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  z-index: -999;
+}
+
+.img img {
+  position: absolute;
+  top: -55px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition-duration: 100ms;
+  image-rendering: pixelated;
+}
+
+.serialNumber {
+  font-size: 14px;
+  color: #8F9396;
+}
+
+.name {
+  font-weight: 500;
+  margin: 8px 0;
+  font-size: 18px;
+}
+
+.badge {
+  padding: 4px 6px;
+  margin: 0 2px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.badge.normal{
+  background-color: #BCBCAC5d;
+}
+
+.badge.fighting{
+  background-color: #BC54425d;
+}
+
+.badge.flying{
+  background-color: #669AFF5d; 
+}
+
+.badge.poison{
+  background-color: #AB549A5d;
+}
+
+.badge.ground{
+  background-color: #DEBC545d;
+}
+.badge.rock{
+  background-color: #BCAC665d;
+}
+.badge.bug{
+  background-color: #ABBC1C5d;
+}
+.badge.ghost{
+  background-color: #6666BC5d;
+}
+.badge.steel{
+  background-color: #ABACBC5d;
+}
+.badge.fire{
+  background-color: #FF421C5d;
+}
+.badge.water{
+  background-color: #2F9AFF5d;
+}
+.badge.grass{
+  background-color: #78CD545d;
+}
+.badge.electric{
+  background-color: #FFCD305d;
+}
+.badge.psychic{
+  background-color: #FF549A5d;
+}
+.badge.ice{
+  background-color: #78DEFF5d;
+}
+.badge.dragon{
+  background-color: #7866EF5d;
+}
+.badge.dark{
+  background-color: #7854425d;
+}
+.badge.fairy{
+  background-color: #FFACFF5d;
+}
+.badge.shadow{
+  background-color: #0E2E4C5d;
+}
+
+

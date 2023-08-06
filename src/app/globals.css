@@ -19,7 +19,16 @@ body {
 }
 
 body {
- 
+    background: #F6F8FC;
+    padding: 0 10vw;
+    font-family: 'Outfit', sans-serif;
+    display: flex;
+    justify-content: center;
+    /* background-image: url(src/pokeball-icon.png); */
+    background-repeat: no-repeat;
+    background-position-x: -180px;
+    background-position-y: -80px;
+    width: 100%;
 }
 
 a {
