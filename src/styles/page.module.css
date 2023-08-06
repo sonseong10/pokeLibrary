@@ -1,0 +1,14 @@
+.layout {
+  display: flex;
+  padding: 70px 0 0;
+  max-width: 975px;
+  margin:0 auto;
+
+  
+}
+
+.main ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none
+}
