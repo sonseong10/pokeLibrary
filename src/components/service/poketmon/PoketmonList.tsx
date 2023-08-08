@@ -8,48 +8,52 @@ async function PoketmonList() {
   return (
     <>
       <ul>
-        {data?.map((item: any, index: number) => (
-          <li key={index} className={cardStyles.wrapper}>
-            <div className={cardStyles.card}>
-              <div className={cardStyles.img}>
-                <Image
-                  src={item.imageUrl}
-                  alt={item.krName}
-                  width={100}
-                  height={100}
-                />
-              </div>
+        {data && data.length > 0 ? (
+          data.map((item: any, index: number) => (
+            <li key={index} className={cardStyles.wrapper}>
+              <div className={cardStyles.card}>
+                <div className={cardStyles.img}>
+                  <Image
+                    src={item.imageUrl}
+                    alt={item.krName}
+                    width={100}
+                    height={100}
+                  />
+                </div>
 
-              <dl>
-                <div>
-                  <dt>code</dt>
-                  <dd className={cardStyles.serialNumber}>No.{index + 1}</dd>
-                </div>
-                <div>
-                  <dt>name</dt>
-                  <dd className={cardStyles.name}>{item.krName}</dd>
-                </div>
-                <div>
-                  <dt>type</dt>
-                  <dd>
-                    {item.types && item.types.length > 0
-                      ? item.types.map((type: string, index: number) => (
-                          <span
-                            key={index}
-                            className={
-                              cardStyles.badge + " " + cardStyles[type]
-                            }
-                          >
-                            {type.charAt(0).toUpperCase() + type.slice(1)}
-                          </span>
-                        ))
-                      : null}
-                  </dd>
-                </div>
-              </dl>
-            </div>
-          </li>
-        ))}
+                <dl>
+                  <div>
+                    <dt>code</dt>
+                    <dd className={cardStyles.serialNumber}>No.{index + 1}</dd>
+                  </div>
+                  <div>
+                    <dt>name</dt>
+                    <dd className={cardStyles.name}>{item.krName}</dd>
+                  </div>
+                  <div>
+                    <dt>type</dt>
+                    <dd>
+                      {item.types && item.types.length > 0
+                        ? item.types.map((type: string, index: number) => (
+                            <span
+                              key={index}
+                              className={
+                                cardStyles.badge + " " + cardStyles[type]
+                              }
+                            >
+                              {type.charAt(0).toUpperCase() + type.slice(1)}
+                            </span>
+                          ))
+                        : null}
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+            </li>
+          ))
+        ) : (
+          <></>
+        )}
       </ul>
     </>
   );
@@ -85,12 +89,15 @@ export async function getServerSideProps() {
       const pokemonInType = responseAsJson.pokemon;
 
       for (let j = 0; j < pokemonInType.length; j++) {
-        const pokemonId = pokemonInType[j].pokemon.url
-          .replace("https://pokeapi.co/api/v2/pokemon/", "")
-          .replace("/", "");
+        const pokemonId =
+          Number(
+            pokemonInType[j].pokemon.url
+              .replace("https://pokeapi.co/api/v2/pokemon/", "")
+              .replace("/", "")
+          ) - 1;
 
         if (data[pokemonId]) {
-          data[pokemonId - 1]?.types?.push(responseAsJson.name);
+          data[pokemonId]?.types?.push(responseAsJson.name);
         }
       }
     }

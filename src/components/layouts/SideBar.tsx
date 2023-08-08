@@ -1,5 +1,6 @@
 import NoSelect from "@/assets/no-pokemon-selected-image.png";
 import Image from "next/image";
+import styles from "@/styles/page.module.css";
 
 /**
  * PoketmonDetail
@@ -7,7 +8,7 @@ import Image from "next/image";
  */
 function SideBar() {
   return (
-    <aside>
+    <aside className={styles.aside}>
       <Image src={NoSelect} alt="" />
     </aside>
   );

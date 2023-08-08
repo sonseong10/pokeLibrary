@@ -9,12 +9,15 @@ type IInputTextProps = {
 
 function InputText({ id, inputType, placeholder, className }: IInputTextProps) {
   return (
-    <input
-      id={id}
-      type="text"
-      className={`${styles[inputType]} ${className}`}
-      placeholder={placeholder}
-    />
+    <div className={`${styles.wrapper} ${inputType}`}>
+      <input
+        id={id}
+        type="text"
+        placeholder={placeholder}
+        className={`${styles[inputType]} ${className}`}
+      />
+      <button title="검색" type="button" className={styles.searchButton} />
+    </div>
   );
 }
 

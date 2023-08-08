@@ -3,12 +3,37 @@
   padding: 70px 0 0;
   max-width: 975px;
   margin:0 auto;
+}
 
-  
+.main {
+  padding-right: 220px;
 }
 
 .main ul {
   display: flex;
   flex-wrap: wrap;
+  flex: 1 1 auto;
   list-style: none
+}
+
+.aside {
+    width: 320px;
+    margin: 10px;
+    height: 78vh;
+    position: fixed;
+    right: calc(10vw - 20px);
+    padding: 0 15px;
+    text-align: center;
+    top: 180px;
+    border-radius: 20px;
+    box-shadow: #EDEDED 0 10px 10px;
+    padding: 15px;
+    background-color: white;
+}
+
+.aside img {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translate(-50%);
 }
