@@ -1,6 +1,7 @@
-import NoSelect from "@/assets/no-pokemon-selected-image.png";
-import Image from "next/image";
-import styles from "@/styles/page.module.css";
+import React from 'react';
+import Image from 'next/image';
+import styles from 'styles/page.module.css';
+import NoSelect from 'assets/no-pokemon-selected-image.png';
 
 /**
  * PoketmonDetail

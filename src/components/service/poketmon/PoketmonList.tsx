@@ -1,6 +1,7 @@
-import axios from "axios";
-import cardStyles from "@/styles/common/card.module.css";
-import Image from "next/image";
+import axios from 'axios';
+import cardStyles from 'styles/common/card.module.css';
+import Image from 'next/image';
+import React from 'react';
 
 async function PoketmonList() {
   const data = await getServerSideProps();
@@ -13,12 +14,7 @@ async function PoketmonList() {
             <li key={index} className={cardStyles.wrapper}>
               <div className={cardStyles.card}>
                 <div className={cardStyles.img}>
-                  <Image
-                    src={item.imageUrl}
-                    alt={item.krName}
-                    width={100}
-                    height={100}
-                  />
+                  <Image src={item.imageUrl} alt={item.krName} width={100} height={100} />
                 </div>
 
                 <dl>
@@ -35,12 +31,7 @@ async function PoketmonList() {
                     <dd>
                       {item.types && item.types.length > 0
                         ? item.types.map((type: string, index: number) => (
-                            <span
-                              key={index}
-                              className={
-                                cardStyles.badge + " " + cardStyles[type]
-                              }
-                            >
+                            <span key={index} className={cardStyles.badge + ' ' + cardStyles[type]}>
                               {type.charAt(0).toUpperCase() + type.slice(1)}
                             </span>
                           ))
@@ -60,19 +51,17 @@ async function PoketmonList() {
 }
 
 type PokemonData = {
-  name: string;
-  url: string;
-  imageUrl: string;
-  krName: string;
-  types: any[];
+  name: string,
+  url: string,
+  imageUrl: string,
+  krName: string,
+  types: any[],
 };
 
 export async function getServerSideProps() {
   const POKEMON_NUM = 898;
   const TYPE_NUM = 18;
-  const response = await axios.get(
-    `https://pokeapi.co/api/v2/pokemon/?limit=${POKEMON_NUM}`
-  );
+  const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=${POKEMON_NUM}`);
   const res = response.data.results;
   const data = res.map((item: any) => ({
     ...item,
@@ -82,7 +71,7 @@ export async function getServerSideProps() {
   const pokeUrls: string[] = [];
   if (res) {
     for (let i = 0; i < TYPE_NUM; i++) {
-      let url = "https://pokeapi.co/api/v2/type/" + (i + 1);
+      let url = 'https://pokeapi.co/api/v2/type/' + (i + 1);
       let response = await axios(url);
       let responseAsJson = await response.data;
 
@@ -90,11 +79,7 @@ export async function getServerSideProps() {
 
       for (let j = 0; j < pokemonInType.length; j++) {
         const pokemonId =
-          Number(
-            pokemonInType[j].pokemon.url
-              .replace("https://pokeapi.co/api/v2/pokemon/", "")
-              .replace("/", "")
-          ) - 1;
+          Number(pokemonInType[j].pokemon.url.replace('https://pokeapi.co/api/v2/pokemon/', '').replace('/', '')) - 1;
 
         if (data[pokemonId]) {
           data[pokemonId]?.types?.push(responseAsJson.name);
@@ -107,21 +92,17 @@ export async function getServerSideProps() {
       pokeUrls.push(url);
     }
 
-    let responses = await Promise.all(pokeUrls.map((url) => axios.get(url)));
+    let responses = await Promise.all(pokeUrls.map(url => axios.get(url)));
     for (let index = 0; index < responses.length; index++) {
       const result = responses[index].data;
-      const koreanName =
-        (result.names?.find((name: any) => name.language.name === "ko") || {})
-          .name || "";
+      const koreanName = (result.names?.find((name: any) => name.language.name === 'ko') || {}).name || '';
       koreanNames.push(koreanName);
     }
 
     const pokemonData: PokemonData[] = data.map((item: any, index: number) => {
       return {
         ...item,
-        imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-          index + 1
-        }.png`,
+        imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`,
         krName: koreanNames[index],
       };
     });

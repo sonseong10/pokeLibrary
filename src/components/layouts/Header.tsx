@@ -1,6 +1,6 @@
-import React from "react";
-import InputText from "../ui/InputText";
-import styles from "@/styles/header.module.css";
+import React from 'react';
+import InputText from '../ui/InputText';
+import styles from 'styles/header.module.css';
 
 /**
  * 글로벌 헤더 컴포넌트
