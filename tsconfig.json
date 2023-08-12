@@ -1,5 +1,4 @@
 {
-  "locale": "ko",
   "compilerOptions": {
     "target": "es5",
     "lib": [
@@ -23,16 +22,22 @@
     "alwaysStrict": true,
     "allowUnusedLabels": true,
     "noUnusedLocals": true,
+    "isolatedModules": true,
     "noUnusedParameters": true,
-    "verbatimModuleSyntax": true,
     "assumeChangesOnlyAffectDirectDependencies": true,
     "jsx": "preserve",
+    "verbatimModuleSyntax": true,
     "allowSyntheticDefaultImports": true,
     "noFallthroughCasesInSwitch": true,
     "removeComments": true,
     "incremental": true,
     "baseUrl": "src",
     "outDir": "dist",
+    "paths": {
+      "*": [
+        "./*"
+      ]
+    },
     "plugins": [
       {
         "name": "next"
@@ -40,9 +45,9 @@
     ]
   },
   "include": [
+    "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/App.jsx",
     ".next/types/**/*.ts"
   ],
   "exclude": [
