@@ -5,16 +5,15 @@ import styles from 'styles/common/button.module.css';
 
 export type IButtonProps = {
   code: number;
-  name: string;
 };
 
-function Button({code, name}: IButtonProps) {
+function Button({code}: IButtonProps) {
   const change = useSetActiveCode();
   return (
     <button
       className={styles.button}
       onClick={() => {
-        change(code, name);
+        change(code);
       }}
       title="상세 정보"
     ></button>

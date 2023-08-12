@@ -1,8 +1,8 @@
 import {createSlice, type PayloadAction} from '@reduxjs/toolkit';
+import type {PokemonDetail, PokemonDetail1, PokemonDetail2} from './detailVal';
 
 export type IDetailState = {
-  detail: any[];
-  name?: string;
+  detail: PokemonDetail;
   code?: number;
 };
 
@@ -12,41 +12,17 @@ const pokemonDetailSlice = createSlice({
   name,
   initialState: {} as IDetailState,
   reducers: {
-    rdxSetActive(state: IDetailState, action: PayloadAction<{name: string; code: number}>) {
-      state.name = action.payload.name;
-      state.code = action.payload.code;
+    rdxSetActive(state: IDetailState, action: PayloadAction<number>) {
+      state.code = action.payload;
     },
-    rdxGoogleADInit(state: IDetailState, action: PayloadAction<Array<any>>) {
-      if (state.detail) {
-        state.detail.concat(
-          action.payload.filter(i => {
-            const find = state.detail!.findIndex(item => item.code === i.code);
-            if (find > -1) {
-              return;
-            } else {
-              return i;
-            }
-          })
-        );
-      } else {
-        state.detail = action.payload;
-      }
-      // state.detail = action.payload;
+    rdxSetUpdateDetail1(state: IDetailState, action: PayloadAction<PokemonDetail1>) {
+      state.detail = {...state.detail, ...action.payload};
     },
-    rdxGoogleManagerUpdate(state: IDetailState) {
-      if (state.detail) {
-        const temp = state.detail;
-        state.detail = temp.map(i => {
-          if (i.type === 'AD_MANAGER') {
-            return {...i, state: true};
-          } else {
-            return i;
-          }
-        });
-      }
+    rdxSetUpdateDetail2(state: IDetailState, action: PayloadAction<PokemonDetail2>) {
+      state.detail = {...state.detail, ...action.payload};
     },
   },
 });
-export const {rdxGoogleADInit, rdxGoogleManagerUpdate, rdxSetActive} = pokemonDetailSlice.actions;
+export const {rdxSetActive, rdxSetUpdateDetail1, rdxSetUpdateDetail2} = pokemonDetailSlice.actions;
 
 export default pokemonDetailSlice.reducer;
