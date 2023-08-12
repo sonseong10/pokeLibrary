@@ -1,22 +1,22 @@
 .wrapper {
+  position: relative;
   flex: 0.5;
   min-width: 30%;
   margin: 10px;
   margin-top: 60px;
-  
-  cursor: pointer;
-  position: relative;
-  border: 2px solid white;
+  border: 2px solid #fff;
   border-radius: 20px;
   transition-duration: 100ms;
   box-shadow: #EDEDED 0 10px 10px;
   padding: 15px;
-  background-color: white;
+  background-color: #fff;
 }
+
 .card {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   padding-top: 30px;
 }
 
@@ -120,4 +120,10 @@
   background-color: #0E2E4C5d;
 }
 
+.wrapper:hover {
+  border: 2px solid #dfdfdf;
+}
 
+.card:hover img {
+  transform: translateX(-50%) scale(1.1);
+}

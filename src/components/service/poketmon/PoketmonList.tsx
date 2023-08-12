@@ -2,6 +2,7 @@ import axios from 'axios';
 import cardStyles from 'styles/common/card.module.css';
 import Image from 'next/image';
 import React from 'react';
+import Button from 'components/ui/Button';
 
 async function PoketmonList() {
   const data = await getServerSideProps();
@@ -39,6 +40,8 @@ async function PoketmonList() {
                     </dd>
                   </div>
                 </dl>
+
+                <Button code={index + 1} name={item.krName} />
               </div>
             </li>
           ))
