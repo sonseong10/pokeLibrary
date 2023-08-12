@@ -1,8 +1,10 @@
 import axios from 'axios';
 import cardStyles from 'styles/common/card.module.css';
+import badgeStyles from 'styles/common/badge.module.css';
 import Image from 'next/image';
 import React from 'react';
 import Button from 'components/ui/Button';
+import {Http, config} from 'utils/HTTP/axios';
 
 async function PoketmonList() {
   const data = await getServerSideProps();
@@ -32,7 +34,7 @@ async function PoketmonList() {
                     <dd>
                       {item.types && item.types.length > 0
                         ? item.types.map((type: string, index: number) => (
-                            <span key={index} className={cardStyles.badge + ' ' + cardStyles[type]}>
+                            <span key={index} className={badgeStyles.badge + ' ' + badgeStyles[type]}>
                               {type.charAt(0).toUpperCase() + type.slice(1)}
                             </span>
                           ))
@@ -41,7 +43,7 @@ async function PoketmonList() {
                   </div>
                 </dl>
 
-                <Button code={index + 1} name={item.krName} />
+                <Button code={index + 1} />
               </div>
             </li>
           ))
@@ -54,17 +56,18 @@ async function PoketmonList() {
 }
 
 type PokemonData = {
-  name: string,
-  url: string,
-  imageUrl: string,
-  krName: string,
-  types: any[],
+  name: string;
+  url: string;
+  imageUrl: string;
+  krName: string;
+  types: any[];
 };
 
 export async function getServerSideProps() {
   const POKEMON_NUM = 898;
   const TYPE_NUM = 18;
-  const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=${POKEMON_NUM}`);
+  const ROOT_URL = config.Url.POKEMON_API;
+  const response = await Http.get(`pokemon/?limit=${POKEMON_NUM}`);
   const res = response.data.results;
   const data = res.map((item: any) => ({
     ...item,
@@ -74,15 +77,14 @@ export async function getServerSideProps() {
   const pokeUrls: string[] = [];
   if (res) {
     for (let i = 0; i < TYPE_NUM; i++) {
-      let url = 'https://pokeapi.co/api/v2/type/' + (i + 1);
+      let url = `${ROOT_URL}type/` + (i + 1);
       let response = await axios(url);
       let responseAsJson = await response.data;
 
       const pokemonInType = responseAsJson.pokemon;
 
       for (let j = 0; j < pokemonInType.length; j++) {
-        const pokemonId =
-          Number(pokemonInType[j].pokemon.url.replace('https://pokeapi.co/api/v2/pokemon/', '').replace('/', '')) - 1;
+        const pokemonId = Number(pokemonInType[j].pokemon.url.replace(`${ROOT_URL}pokemon/`, '').replace('/', '')) - 1;
 
         if (data[pokemonId]) {
           data[pokemonId]?.types?.push(responseAsJson.name);
@@ -91,7 +93,7 @@ export async function getServerSideProps() {
     }
 
     for (let i = 0; i < POKEMON_NUM; i++) {
-      let url = `https://pokeapi.co/api/v2/pokemon-species/${i + 1}`;
+      let url = `${ROOT_URL}pokemon-species/${i + 1}`;
       pokeUrls.push(url);
     }
 
@@ -105,7 +107,7 @@ export async function getServerSideProps() {
     const pokemonData: PokemonData[] = data.map((item: any, index: number) => {
       return {
         ...item,
-        imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`,
+        imageUrl: `${config.Url.POKEMON_STATIC_URL}/${index + 1}.png`,
         krName: koreanNames[index],
       };
     });
