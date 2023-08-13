@@ -11,7 +11,7 @@ async function PoketmonList() {
 
   return (
     <>
-      <ul>
+      <ul id="pokemon-list">
         {data && data.length > 0 ? (
           data.map((item: any, index: number) => (
             <li key={index} className={cardStyles.wrapper}>
@@ -27,7 +27,9 @@ async function PoketmonList() {
                   </div>
                   <div>
                     <dt>name</dt>
-                    <dd className={cardStyles.name}>{item.krName}</dd>
+                    <dd id="name" className={cardStyles.name}>
+                      {item.krName}
+                    </dd>
                   </div>
                   <div>
                     <dt>type</dt>

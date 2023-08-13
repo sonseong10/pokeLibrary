@@ -1,12 +1,13 @@
 .layout {
   display: flex;
   padding: 70px 0 0;
-  max-width: 975px;
+  width: 975px;
   margin:0 auto;
 }
 
 .main {
-  padding-right: 220px;
+  padding-right: 120px;
+  width: 100%;
 }
 
 .main ul {

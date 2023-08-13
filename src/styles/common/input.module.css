@@ -15,18 +15,18 @@
 } 
 
 .searchButton {
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    display: block;
-    width: 32px;
-    height: 32px;
-    background: url("../../assets/pokeball-icon.png") no-repeat center center;
-    background-color: #ff5350;
-    background-size: 16px;
-    border: none;
-    border-radius: 8px;
-    box-shadow: #ff535088 5px 5px 15px;
-    transform: translateY(-50%);
-    position: absolute;
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  display: block;
+  width: 32px;
+  height: 32px;
+  background: url("../../assets/pokeball-icon.png") no-repeat center center;
+  background-color: #ff5350;
+  background-size: 16px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: #ff535088 5px 5px 15px;
+  transform: translateY(-50%);
+  cursor: pointer;
 }
