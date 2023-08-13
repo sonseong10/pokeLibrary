@@ -6,17 +6,19 @@
   width: 320px;
   height: 78vh;
   padding: 15px;
-  padding-top: 100px;
+  padding-top: 68px;
   border-radius: 20px;
   background-color: #fff;
   box-shadow: #EDEDED 0 10px 10px;
   text-align: center;
 }
 
-.aside img {
+.activeNone {
   position: absolute;
   top: -100px;
   left: 50%;
+  width: 100px;
+  height: auto;
   transform: translate(-50%);
 }
 
@@ -29,8 +31,104 @@
 
 .detailImage {
   position: absolute;
-    object-fit: contain;
-    image-rendering: pixelated;
-    width: 320px;
-    height: 16vh;
+  top: -100px;
+  left: 50%;
+  width: 320px;
+  height: 16vh;
+  object-fit: contain;
+  image-rendering: pixelated;
+  transform: translate(-50%);
+}
+
+.code {
+  color: #8F9396;
+}
+
+.name {
+  font-size: 26px;
+}
+
+.genus {
+  margin-bottom: 6px;
+  font-weight: 400;
+  display: block;
+}
+
+.comment {
+  text-wrap: wrap;
+    display: block;
+    word-break: break-all;
+    color: #8F9396;
+    text-align: center;
+    font-size: 14px;
+}
+
+.sizeInfo {
+  display: flex;
+}
+
+.size {
+  padding: 8px 15px;
+    border: 1px solid #ddd;
+    position: relative;
+    border-radius: 6px;
+    flex: 1;
+    margin: 0 4px;
+}
+
+.size dt {
+  color: #8F9396;
+    position: absolute;
+    top: -10px;
+    margin: 0;
+    background-color: #fff;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+}
+
+.size dd {
+  font-size: 14px;
+}
+
+.skill{
+  width: 100%;
+  padding: 8px 0;
+  border-radius: 30px;
+  margin: 5px;
+  display: inline-block;
+  background-color: #F6F8FC;
+}
+
+.title {
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.mgSm {
+  margin-bottom: 8px;
+}
+
+.mgMd {
+  margin-bottom: 16px;
+}
+
+.loading {
+  background: url("../../assets/pokeball-icon.png") no-repeat center center;
+  width: 120px;
+  height: 120px;
+  background-size: 80px;
+  filter: brightness(80%);
+  margin: 0 auto;
+  animation: rotatePokeBall ease-in-out 3s infinite;
+
+}
+
+@keyframes rotatePokeBall {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

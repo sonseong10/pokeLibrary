@@ -2,7 +2,7 @@ import {useDispatch} from 'react-redux';
 import {shallowEqual, useSelector} from 'react-redux';
 import {rdxSetActive, rdxSetUpdateDetail1, rdxSetUpdateDetail2} from './detailRedux';
 import type {RootState} from 'redux/store';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {Http} from 'utils/HTTP/axios';
 import type {PokemonDetail1} from './detailVal';
 
@@ -38,8 +38,10 @@ export const usePokemonDetails = () => {
 export const useInitPokemonDetails = () => {
   const {code} = usePokemonActive();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState<boolean>(true);
 
   const getDetail = async (code: number) => {
+    setLoading(true);
     const res1 = await Http.get<PokemonDetail1>(`/pokemon/${code}`);
     if (res1) {
       dispatch(rdxSetUpdateDetail1(res1.data));
@@ -47,6 +49,7 @@ export const useInitPokemonDetails = () => {
 
       if (res2) {
         dispatch(rdxSetUpdateDetail2(res2.data));
+        setLoading(false);
       }
     }
   };
@@ -56,4 +59,6 @@ export const useInitPokemonDetails = () => {
       getDetail(code);
     }
   }, [code]);
+
+  return loading;
 };

@@ -10,3 +10,8 @@
   border: none;
   cursor: pointer;
 }
+
+.button:focus {
+  border-radius: 20px;
+  outline-color: #ff5350;
+}

@@ -6,93 +6,123 @@ import badgeStyles from 'styles/common/badge.module.css';
 import NoSelect from 'assets/no-pokemon-selected-image.png';
 import {useInitPokemonDetails, usePokemonActive, usePokemonDetails} from 'redux/detail/detailHook';
 import {config} from 'utils/HTTP/axios';
+import {Chart as ChartJS, RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend} from 'chart.js';
+import {Radar} from 'react-chartjs-2';
 
 const LIMITE_COUNT = 649;
+
+ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
 /**
  * PoketmonDetail
  * @returns JSX.Element
  */
 function SideBar() {
-  useInitPokemonDetails();
+  const loading = useInitPokemonDetails();
   const {code} = usePokemonActive();
   const pokemon = usePokemonDetails();
+
+  const data = {
+    labels: ['HP', 'ATK', 'DEF', 'SpA', 'SpD', 'SPD'],
+    datasets: [
+      {
+        label: 'count',
+        data: pokemon ? pokemon.stats.map(stats => stats.base_stat) : [],
+        backgroundColor: '#ff53502e',
+        borderColor: '#ff5350',
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const option = {
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+  };
 
   return (
     <aside className={styles.aside}>
       {code && pokemon ? (
         <>
-          <Image
-            src={
-              code > LIMITE_COUNT
-                ? `${config.Url.POKEMON_MOVE_URL}/${code}.png`
-                : `${config.Url.POKEMON_MOVE_URL}/animated/${code}.gif`
-            }
-            width={320}
-            height={100}
-            alt={`${code}번째 포켓몬`}
-            className={styles.detailImage}
-          />
-          <div>
-            <div>
-              <span>No.{code}</span>
-            </div>
-
-            <div>
-              <h3>{pokemon?.names?.find(name => name.language.name === 'ko')?.name}</h3>
-            </div>
-
-            <div>
-              <strong>{pokemon?.genera?.find(genus => genus.language.name === 'ko')?.genus}</strong>
-              <p>{pokemon?.flavor_text_entries?.find(flavorText => flavorText.language.name === 'ko')?.flavor_text}</p>
-            </div>
-
-            <ul className={styles.typeWrapper}>
-              {pokemon?.types.map(({type: {name}}, index: number) => (
-                <li className={badgeStyles.badge + ' ' + badgeStyles[name]} key={index}>
-                  <span>{name.charAt(0).toUpperCase() + name.slice(1)}</span>
-                </li>
-              ))}
-            </ul>
-
-            <dl>
+          {loading ? (
+            <div className={styles.loading}></div>
+          ) : (
+            <>
+              <Image
+                src={
+                  code > LIMITE_COUNT
+                    ? `${config.Url.POKEMON_MOVE_URL}/${code}.png`
+                    : `${config.Url.POKEMON_MOVE_URL}/animated/${code}.gif`
+                }
+                width={320}
+                height={100}
+                alt={`${code}번째 포켓몬`}
+                className={styles.detailImage}
+              />
               <div>
-                <dt>키</dt>
-                <dd>
-                  <span>{pokemon?.height / 10}m</span>
-                </dd>
-              </div>
-              <div>
-                <dt>무게</dt>
-                <dd>
-                  <span>{pokemon?.weight / 10}kg</span>
-                </dd>
-              </div>
-            </dl>
+                <div className={styles.mgSm}>
+                  <span className={styles.code}>No.{code}</span>
+                </div>
 
-            <div>
-              <strong>기술</strong>
+                <div className={styles.mgSm}>
+                  <h3 className={styles.name}>{pokemon?.names?.find(name => name.language.name === 'ko')?.name}</h3>
+                </div>
 
-              {pokemon?.abilities.map(({ability}, index) => (
-                <span key={index}>{ability.name}</span>
-              ))}
-            </div>
+                <div className={styles.mgMd}>
+                  <strong className={styles.genus}>
+                    {pokemon?.genera?.find(genus => genus.language.name === 'ko')?.genus}
+                  </strong>
+                  <p className={styles.comment}>
+                    {pokemon?.flavor_text_entries?.find(flavorText => flavorText.language.name === 'ko')?.flavor_text}
+                  </p>
+                </div>
 
-            <div>
-              <strong>통계</strong>
-              <dl>
-                {pokemon?.stats.map((stats, index) => (
-                  <div key={index}>
-                    <dt>{stats.stat.name}</dt>
-                    <dd>{stats.base_stat}</dd>
+                <ul className={`${styles.typeWrapper} ${styles.mgMd}`}>
+                  {pokemon?.types.map(({type: {name}}, index: number) => (
+                    <li className={badgeStyles.badge + ' ' + badgeStyles[name]} key={index}>
+                      <span>{name.charAt(0).toUpperCase() + name.slice(1)}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <dl className={`${styles.sizeInfo} ${styles.mgMd}`}>
+                  <div className={styles.size}>
+                    <dt>키</dt>
+                    <dd>
+                      <span>{pokemon?.height / 10}m</span>
+                    </dd>
                   </div>
-                ))}
-              </dl>
-            </div>
-          </div>
+                  <div className={styles.size}>
+                    <dt>무게</dt>
+                    <dd>
+                      <span>{pokemon?.weight / 10}kg</span>
+                    </dd>
+                  </div>
+                </dl>
+
+                <div className={styles.mgMd}>
+                  <strong className={styles.title}>기술</strong>
+
+                  {pokemon?.abilities.map(({ability}, index) => (
+                    <span className={styles.skill} key={index}>
+                      {ability.name}
+                    </span>
+                  ))}
+                </div>
+
+                <div>
+                  <strong className={styles.title}>통계</strong>
+                  <Radar data={data} options={option} />
+                </div>
+              </div>
+            </>
+          )}
         </>
       ) : (
         <>
-          <Image src={NoSelect} alt="" />
+          <Image src={NoSelect} alt="선택한 포켓몬 없음" className={styles.activeNone} />
           <p>
             아직 선택한 포켓몬이
             <br /> 없습니다.

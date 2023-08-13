@@ -38,6 +38,7 @@
   transform: translateX(-50%);
   transition-duration: 100ms;
   image-rendering: pixelated;
+  z-index: 1;
 }
 
 .serialNumber {
