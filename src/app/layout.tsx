@@ -1,3 +1,4 @@
+import Footer from 'components/layouts/Footer';
 import './globals.css';
 import Header from 'components/layouts/Header';
 import {Inter} from 'next/font/google';
@@ -14,7 +15,7 @@ function RootLayout({children}: {children: React.ReactNode}) {
           <>
             <Header />
             {children}
-            <footer></footer>
+            <Footer />
           </>
         </ReduxProvider>
       </body>

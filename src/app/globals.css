@@ -22,8 +22,6 @@ body {
     background: #F6F8FC;
     padding: 0 10vw;
     font-family: 'Outfit', sans-serif;
-    display: flex;
-    justify-content: center;
     background-image: url("../assets/pokeball-icon.png");
     background-repeat: no-repeat;
     background-position-x: -180px;
