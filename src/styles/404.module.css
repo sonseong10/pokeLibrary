@@ -1,0 +1,32 @@
+.error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.error img {
+  display: block;
+  width: 250px;
+  height: auto;
+  margin: 0 auto 24px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.error h2 {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.error a {
+  display: block;
+  padding: 6px 10px;
+  max-width:180px;
+  background-color: #ff5350;
+  color: #fff;
+  border-radius: 6px;
+  margin: 10px auto 0;
+
+}
