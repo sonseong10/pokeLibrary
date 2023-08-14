@@ -5,7 +5,7 @@ import styles from 'styles/404.module.css';
 function NotFound() {
   const [randomNumber, setRandomNumber] = useState<number | undefined>(undefined);
   useEffect(() => {
-    setRandomNumber(Math.floor(Math.random() * 898) + 1);
+    setRandomNumber(Math.floor(Math.random() * 649) + 1);
   }, []);
   return (
     <div className={styles.error}>
