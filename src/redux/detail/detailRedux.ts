@@ -12,7 +12,7 @@ const pokemonDetailSlice = createSlice({
   name,
   initialState: {} as IDetailState,
   reducers: {
-    rdxSetActive(state: IDetailState, action: PayloadAction<number>) {
+    rdxSetActive(state: IDetailState, action: PayloadAction<number | undefined>) {
       state.code = action.payload;
     },
     rdxSetUpdateDetail1(state: IDetailState, action: PayloadAction<PokemonDetail1>) {

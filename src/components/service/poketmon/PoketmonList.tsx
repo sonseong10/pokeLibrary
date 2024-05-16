@@ -13,7 +13,7 @@ async function PoketmonList() {
     <>
       <ul id="pokemon-list">
         {data && data.length > 0 ? (
-          data.map((item: any, index: number) => (
+          data.map((item, index) => (
             <li key={index} className={cardStyles.wrapper}>
               <div className={cardStyles.card}>
                 <div className={cardStyles.img}>

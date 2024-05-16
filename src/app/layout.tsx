@@ -12,11 +12,9 @@ function RootLayout({children}: {children: React.ReactNode}) {
     <html lang="ko">
       <body className={inter.className}>
         <ReduxProvider>
-          <>
-            <Header />
-            {children}
-            <Footer />
-          </>
+          <Header />
+          {children}
+          <Footer />
         </ReduxProvider>
       </body>
     </html>

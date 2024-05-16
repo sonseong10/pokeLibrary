@@ -13,13 +13,11 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <>
-      <div className={styles.layout}>
-        <main className={styles.main}>
-          <PoketmonList />
-        </main>
-        <SideBar />
-      </div>
-    </>
+    <div className={styles.layout}>
+      <main className={styles.main}>
+        <PoketmonList />
+      </main>
+      <SideBar />
+    </div>
   );
 }

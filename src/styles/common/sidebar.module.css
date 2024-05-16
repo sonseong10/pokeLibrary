@@ -1,9 +1,9 @@
 .aside {
-  position: fixed;
+  position: sticky;
   top: 180px;
   right: calc(10vw - 20px);
   margin: 10px;
-  width: 320px;
+  min-width: 320px;
   height: 78vh;
   padding: 15px;
   padding-top: 68px;
@@ -11,6 +11,7 @@
   background-color: #fff;
   box-shadow: #EDEDED 0 10px 10px;
   text-align: center;
+  z-index: 1;
 }
 
 .activeNone {
@@ -55,12 +56,11 @@
 }
 
 .comment {
-  text-wrap: wrap;
-    display: block;
-    word-break: break-all;
-    color: #8F9396;
-    text-align: center;
-    font-size: 14px;
+  display: block;
+  word-break: break-all;
+  color: #8F9396;
+  text-align: center;
+  font-size: 14px;
 }
 
 .sizeInfo {
@@ -113,6 +113,10 @@
   margin-bottom: 16px;
 }
 
+.removeBtn {
+  display: none;
+}
+
 .loading {
   background: url("../../assets/pokeball-icon.png") no-repeat center center;
   width: 120px;
@@ -121,7 +125,6 @@
   filter: brightness(80%);
   margin: 0 auto;
   animation: rotatePokeBall ease-in-out 3s infinite;
-
 }
 
 @keyframes rotatePokeBall {
@@ -130,5 +133,54 @@
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+
+@media screen and (max-width: 1180px) {
+  .aside.hide {
+    display: none;
+  }
+
+  .aside {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    margin: 0;
+    top: auto;
+    min-width: 100%;
+    right: auto;
+    overflow-y: auto;
+    padding: 15px;
+    z-index: 20;
+    border-radius: 0;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    height: 96vh;
+  }
+
+  .aside > img {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: initial;
+  }
+
+  .aside .option {
+    width: 340px;
+    margin: 0 auto;
+  }
+
+  .removeBtn {
+    position: absolute;
+    display: block;
+    top: 16px;
+    right: 16px;
+    width: 34px;
+    padding: 8px;
+    border: 1px solid #1d1d1d;
+    background-color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
   }
 }

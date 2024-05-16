@@ -6,7 +6,6 @@
 }
 
 .main {
-  padding-right: 120px;
   width: 100%;
 }
 
@@ -17,3 +16,9 @@
   list-style: none
 }
 
+
+@media screen and (max-width: 1180px) {
+  .layout {
+    width: 100%;
+  }
+}

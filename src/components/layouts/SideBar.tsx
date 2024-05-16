@@ -4,7 +4,7 @@ import Image from 'next/image';
 import styles from 'styles/common/sidebar.module.css';
 import badgeStyles from 'styles/common/badge.module.css';
 import NoSelect from 'assets/no-pokemon-selected-image.png';
-import {useInitPokemonDetails, usePokemonActive, usePokemonDetails} from 'redux/detail/detailHook';
+import {useInitPokemonDetails, usePokemonActive, usePokemonDetails, useSetActiveCode} from 'redux/detail/detailHook';
 import {config} from 'utils/HTTP/axios';
 import {Chart as ChartJS, RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend} from 'chart.js';
 import {Radar} from 'react-chartjs-2';
@@ -20,6 +20,7 @@ function SideBar() {
   const loading = useInitPokemonDetails();
   const {code} = usePokemonActive();
   const pokemon = usePokemonDetails();
+  const remove = useSetActiveCode();
 
   const data = {
     labels: ['HP', 'ATK', 'DEF', 'SpA', 'SpD', 'SPD'],
@@ -43,7 +44,7 @@ function SideBar() {
   };
 
   return (
-    <aside className={styles.aside}>
+    <aside className={`${styles.aside} ${!code && styles.hide}`}>
       {code && pokemon ? (
         <>
           {loading ? (
@@ -112,11 +113,21 @@ function SideBar() {
                   ))}
                 </div>
 
-                <div>
+                <div className={styles.option}>
                   <strong className={styles.title}>통계</strong>
                   <Radar data={data} options={option} />
                 </div>
               </div>
+
+              <button
+                title="닫기"
+                onClick={() => {
+                  remove();
+                }}
+                className={styles.removeBtn}
+              >
+                X
+              </button>
             </>
           )}
         </>

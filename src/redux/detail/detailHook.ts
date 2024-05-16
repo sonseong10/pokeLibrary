@@ -19,7 +19,7 @@ export const usePokemonActive = () => {
 
 export const useSetActiveCode = () => {
   const dispatch = useDispatch();
-  return (code: number) => {
+  return (code?: number) => {
     dispatch(rdxSetActive(code));
   };
 };
