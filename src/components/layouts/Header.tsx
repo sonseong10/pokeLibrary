@@ -10,7 +10,7 @@ function Header(): JSX.Element {
   return (
     <header className={styles.header}>
       <div className={styles.div}>
-        <InputText inputType="search" placeholder="포케몬 이름을 입력해 주세요.." />
+        <InputText inputType="search" placeholder="포켓몬 이름을 입력해 주세요.." />
       </div>
     </header>
   );
