@@ -4,7 +4,7 @@ import PoketmonList from 'components/service/poketmon/PoketmonList';
 import dynamic from 'next/dynamic';
 import type {Metadata} from 'next';
 
-const SideBar = dynamic(() => import('components/layouts/SideBar'), {ssr: false});
+const SideBar = dynamic(() => import('components/layouts/SideBar'));
 
 export const metadata: Metadata = {
   title: '포켓몬 사전',
