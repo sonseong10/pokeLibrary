@@ -3,10 +3,10 @@ import InputText from '../ui/InputText';
 import styles from 'styles/header.module.css';
 
 /**
- * 글로벌 헤더 컴포넌트
+ * Global Header component.
  * @returns JSX.Element
  */
-function Header(): JSX.Element {
+function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.div}>
